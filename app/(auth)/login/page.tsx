@@ -4,6 +4,12 @@ import { FC, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
+import { Alkatra } from "next/font/google";
+
+const alk = Alkatra({
+  subsets: ["latin"],
+});
 
 const page: FC = ({}) => {
   const [loading, setLoading] = useState(false);
@@ -17,21 +23,25 @@ const page: FC = ({}) => {
   };
 
   return (
-    <button
-      onClick={handleGoogleLogin}
-      className="bg-black w-[15rem] p-4 m-6 rounded-2xl shadow-lg shadow-black/40 flex items-center space-x-4"
-    >
+    <div className="flex flex-col space-y-10 items-center justify-center min-h-screen">
       {loading ? (
-        <>
-          <AiOutlineLoading3Quarters className="text-white text-center w-8 h-5 animate-spin" />
-        </>
+        <div className="bg-[#1f4168] text-white px-5 py-3 md:px-8 md:py-4 rounded-md w-[10rem]">
+          <AiOutlineLoading3Quarters className="w-5 h-5 animate-spin mx-auto text-center" />
+        </div>
       ) : (
-        <>
-          <FcGoogle className="text-white w-8 h-5" />
-          <span className="text-white">Sign in with Google</span>
-        </>
+        <button
+          onClick={handleGoogleLogin}
+          className="bg-[#1f4168] text-white px-5 py-3 md:px-8 md:py-4 rounded-md flex items-center space-x-4"
+        >
+          <FcGoogle className="w-5 h-5 md:w-7 md:h-7" />
+          <p className="font-light md:text-2xl">Login with Google</p>
+        </button>
       )}
-    </button>
+
+      <Link href={"/"}>
+        <p className="text-sm underline">Back to home</p>
+      </Link>
+    </div>
   );
 };
 
