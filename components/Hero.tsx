@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import hero from "@/public/hero-2.jpg";
+import hero from "@/public/hero.png";
 import { Alkatra } from "next/font/google";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 
@@ -11,29 +11,24 @@ const alk = Alkatra({
 
 const Hero: FC = () => {
   return (
-    <section className="h-screen flex flex-col md:flex-row lg:p-16">
-      <div className="flex-[0.4] p-4 flex flex-col items-center md:items-start justify-center space-y-12">
+    <section className="flex h-screen flex-col">
+      <div className="flex flex-[0.5] flex-col items-center justify-center space-y-12  p-4 ">
         <h1
-          className={`${alk.className}  text-[#1f4168] uppercase font-extrabold text-4xl md:text-6xl lg:text-8xl text-center md:text-start `}
+          className={`${alk.className}  text-center text-4xl font-extrabold uppercase text-black md:text-start md:text-6xl lg:text-8xl `}
         >
           Whisper Wire
         </h1>
 
         <Link
           href={"/login"}
-          className="  flex items-center bg-[#f9a31c]/90 transition-colors ease-out hover:bg-[#f9a31c]  px-5 py-2 rounded-[0.2rem] shadow-lg shadow-black/20 text-white  space-x-4 uppercase tracking-wide"
+          className="flex items-center space-x-4 rounded-full border-2 border-amber-400 bg-amber-500  px-5  py-2 uppercase tracking-wide text-white shadow-md transition-colors  ease-out hover:shadow-xl"
         >
-          <p className="font-medium text-lg">Login</p>
+          <p className="text-lg font-medium">Login</p>
           <IoIosArrowDroprightCircle className="h-4 w-4 " />
         </Link>
       </div>
-      <div className="flex-[0.6] flex items-center justify-center md:justify-end w-full p-4">
-        <Image
-          src={hero}
-          alt="hero-image"
-          className="w-[80%] small-tab:w-[60%]  sm:w-[50%]  md:w-[90%] bg-red-500"
-          priority
-        />
+      <div className="flex flex-[0.5] items-center justify-center ">
+        <Image src={hero} alt="hero" className="md:w-[55%]" priority />
       </div>
     </section>
   );

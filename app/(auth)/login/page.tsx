@@ -23,17 +23,17 @@ const page: FC = ({}) => {
   };
 
   return (
-    <div className="flex flex-col space-y-10 items-center justify-center min-h-screen">
+    <div className="flex min-h-screen flex-col items-center justify-center space-y-10">
       {loading ? (
-        <div className="bg-[#1f4168] text-white px-5 py-3 md:px-8 md:py-4 rounded-md w-[10rem]">
-          <AiOutlineLoading3Quarters className="w-5 h-5 animate-spin mx-auto text-center" />
+        <div className="w-[10rem] rounded-md bg-black px-5 py-3 text-amber-500 md:px-8 md:py-4">
+          <AiOutlineLoading3Quarters className="mx-auto h-5 w-5 animate-spin text-center" />
         </div>
       ) : (
         <button
           onClick={handleGoogleLogin}
-          className="bg-[#1f4168] text-white px-5 py-3 md:px-8 md:py-4 rounded-md flex items-center space-x-4"
+          className="flex items-center space-x-4 rounded-md bg-black px-5 py-3 text-white md:px-8 md:py-4 md:uppercase md:tracking-wider"
         >
-          <FcGoogle className="w-5 h-5 md:w-7 md:h-7" />
+          <FcGoogle className="h-5 w-5 md:h-7 md:w-7" />
           <p className="font-light md:text-2xl">Login with Google</p>
         </button>
       )}
