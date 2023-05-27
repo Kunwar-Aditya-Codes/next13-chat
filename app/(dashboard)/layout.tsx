@@ -12,9 +12,11 @@ interface layoutProps {
 
 const Layout = async ({ children }: layoutProps) => {
   return (
-    <div className="w-full h-screen flex relative">
+    <div className="relative flex h-screen w-full flex-col overflow-hidden sm:flex-row">
       <Sidebar />
-      <div className="sm:flex-[0.70] lg:flex-[0.75]">{children}</div>
+      <div className="w-full bg-red-500 sm:flex-[0.70] lg:flex-[0.75]">
+        {children}
+      </div>
     </div>
   );
 };

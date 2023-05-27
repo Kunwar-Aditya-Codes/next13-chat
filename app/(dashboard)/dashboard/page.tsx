@@ -6,7 +6,7 @@ const page = async ({}) => {
 
   // console.log(session);
 
-  return <div className="h-screen"></div>;
+  return <div className="h-screen ">hh</div>;
 };
 
 export default page;
