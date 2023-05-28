@@ -20,7 +20,6 @@ export async function fetchRedis(
     throw new Error("Error executing Redis command" + restResponse.statusText);
   }
 
-  const data = (await restResponse.json()) as { result: string | null };
-
+  const data = await restResponse.json();
   return data.result;
 }

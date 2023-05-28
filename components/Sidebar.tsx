@@ -1,19 +1,32 @@
 "use client";
 import { AiOutlineClose } from "react-icons/ai";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { DynaPuff } from "next/font/google";
 import { IoExitOutline } from "react-icons/io5";
 import Link from "next/link";
 import { HiMenu } from "react-icons/hi";
-import { TiPlus } from "react-icons/ti";
+import { MdPersonAddAlt1 } from "react-icons/md";
+import { BsBellFill } from "react-icons/bs";
 
 const dyna = DynaPuff({
   subsets: ["latin"],
 });
 
-const Sidebar = ({}) => {
+interface SidebarProps {
+  initialUnseenRequestsCount: number;
+  sessionId: string;
+}
+
+const Sidebar: FC<SidebarProps> = ({
+  initialUnseenRequestsCount,
+  sessionId,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [unseenRequestsCount, setUnseenRequestsCount] = useState<number>(
+    initialUnseenRequestsCount
+  );
+
   return (
     <>
       <div className="m-1 ">
@@ -40,7 +53,7 @@ const Sidebar = ({}) => {
             <div className="flex grow items-center space-x-2 ">
               <FaUserCircle className="h-6 w-6" />
               <h1
-                className={` ${dyna.className} text-sm font-bold  tracking-wider first-letter:text-amber-600`}
+                className={` ${dyna.className}  font-bold  tracking-wider first-letter:text-amber-600`}
               >
                 Kunwar Aditya
               </h1>
@@ -50,21 +63,24 @@ const Sidebar = ({}) => {
             </Link>
           </div>
 
-          {/* Add button */}
-          <Link href={"/dashboard/add"}>
-            <div className="m-2 flex items-center justify-center  space-x-2 rounded-md bg-amber-600 px-3 py-2 text-center text-sm text-white transition active:scale-95">
-              <p>Add Friend</p>
-              <TiPlus className="h-4 w-4 text-white" />
-            </div>
-          </Link>
+          <div className="flex items-center justify-start space-x-4">
+            {/* Add button */}
+            <Link href={"/dashboard/add"}>
+              <MdPersonAddAlt1 className="mx-2 my-6 h-8 w-8 rounded-lg bg-amber-600 p-[0.35rem] text-white shadow-md" />
+            </Link>
+
+            {/* Notifications */}
+            <Link href={"/dashboard/requests"} className="relative">
+              <BsBellFill className="mx-2 my-6 h-8 w-8 rounded-lg bg-amber-600 p-2 text-white shadow-md" />
+              {unseenRequestsCount > 0 && (
+                <span className="absolute left-7 top-4 w-4 rounded-full bg-white text-center text-xs ">
+                  {unseenRequestsCount}
+                </span>
+              )}
+            </Link>
+          </div>
 
           {/* Lists */}
-          <div className="mx-2 my-6 text-xs font-bold uppercase tracking-wider text-gray-600">
-            <h3>Friend Requests</h3>
-          </div>
-          <div className="mx-2 my-6 text-xs font-bold uppercase tracking-wider text-gray-600">
-            <h3>Chats</h3>
-          </div>
         </div>
       </div>
     </>
