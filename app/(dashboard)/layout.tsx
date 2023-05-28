@@ -15,22 +15,22 @@ interface layoutProps {
 }
 
 const Layout = async ({ children }: layoutProps) => {
-  const session = await getServerSession(authOptions);
+  // const session = await getServerSession(authOptions);
 
-  if (!session) notFound();
+  // if (!session) notFound();
 
-  const unseenRequestCount = (
-    (await fetchRedis(
-      "smembers",
-      `user:${session.user.id}:incoming_friend_requests`
-    )) as User[]
-  ).length;
+  // const unseenRequestCount = (
+  //   (await fetchRedis(
+  //     "smembers",
+  //     `user:${session.user.id}:incoming_friend_requests`
+  //   )) as User[]
+  // ).length;
 
   return (
     <div className="relative flex h-screen w-full flex-col overflow-hidden sm:flex-row">
       <Sidebar
-        initialUnseenRequestsCount={unseenRequestCount}
-        sessionId={session.user.id}
+      // initialUnseenRequestsCount={unseenRequestCount}
+      // sessionId={session.user.id}
       />
       <div className="w-full sm:flex-[0.70] lg:flex-[0.75]">{children}</div>
     </div>

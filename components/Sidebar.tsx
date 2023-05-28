@@ -1,5 +1,5 @@
 "use client";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiFillHome } from "react-icons/ai";
 import { FC, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { DynaPuff } from "next/font/google";
@@ -14,18 +14,20 @@ const dyna = DynaPuff({
 });
 
 interface SidebarProps {
-  initialUnseenRequestsCount: number;
-  sessionId: string;
+  // initialUnseenRequestsCount: number;
+  // sessionId: string;
 }
 
-const Sidebar: FC<SidebarProps> = ({
-  initialUnseenRequestsCount,
-  sessionId,
-}) => {
+const Sidebar: FC<SidebarProps> = (
+  {
+    // initialUnseenRequestsCount,
+    // sessionId,
+  }
+) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [unseenRequestsCount, setUnseenRequestsCount] = useState<number>(
-    initialUnseenRequestsCount
-  );
+  // const [unseenRequestsCount, setUnseenRequestsCount] = useState<number>(
+  //   initialUnseenRequestsCount
+  // );
 
   return (
     <>
@@ -63,20 +65,25 @@ const Sidebar: FC<SidebarProps> = ({
             </Link>
           </div>
 
-          <div className="flex items-center justify-start space-x-4">
+          <div className="flex items-center justify-evenly space-x-4  px-2">
+            {/* Home button */}
+            <Link href={"/dashboard"} className="my-6  ">
+              <AiFillHome className=" h-8 w-8 rounded-lg bg-amber-600 p-[0.35rem] text-white shadow-md" />
+            </Link>
+
             {/* Add button */}
-            <Link href={"/dashboard/add"}>
-              <MdPersonAddAlt1 className="mx-2 my-6 h-8 w-8 rounded-lg bg-amber-600 p-[0.35rem] text-white shadow-md" />
+            <Link href={"/dashboard/add"} className="my-6 ">
+              <MdPersonAddAlt1 className="  h-8 w-8 rounded-lg bg-amber-600 p-[0.35rem] text-white shadow-md" />
             </Link>
 
             {/* Notifications */}
-            <Link href={"/dashboard/requests"} className="relative">
-              <BsBellFill className="mx-2 my-6 h-8 w-8 rounded-lg bg-amber-600 p-2 text-white shadow-md" />
-              {unseenRequestsCount > 0 && (
-                <span className="absolute left-7 top-4 w-4 rounded-full bg-white text-center text-xs ">
+            <Link href={"/dashboard/requests"} className="relative my-6">
+              <BsBellFill className="h-8 w-8 rounded-lg bg-amber-600 p-2 text-white shadow-md" />
+              {/* {unseenRequestsCount > 0 && (
+                <span className="absolute -top-1 left-6 w-4 rounded-full bg-white text-center text-xs ">
                   {unseenRequestsCount}
                 </span>
-              )}
+              )} */}
             </Link>
           </div>
 
