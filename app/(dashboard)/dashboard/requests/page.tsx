@@ -10,26 +10,26 @@ const dyna = DynaPuff({
 });
 
 const page = async ({}) => {
-//   const session = await getServerSession(authOptions);
-//   if (!session) notFound();
+  const session = await getServerSession(authOptions);
+  if (!session) notFound();
 
-//   const incomingSenderIds = (await fetchRedis(
-//     "smembers",
-//     `user:${session.user.id}:incoming_friend_requests`
-//   )) as string[];
+  const incomingSenderIds = (await fetchRedis(
+    "smembers",
+    `user:${session.user.id}:incoming_friend_requests`
+  )) as string[];
 
-//   const incomingFriendRequests = await Promise.all(
-//     incomingSenderIds.map(async (senderId) => {
-//       const sender = (await fetchRedis("get", `user:${senderId}`)) as string;
+  const incomingFriendRequests = await Promise.all(
+    incomingSenderIds.map(async (senderId) => {
+      const sender = (await fetchRedis("get", `user:${senderId}`)) as string;
 
-//       const senderData = JSON.parse(sender) as User;
+      const senderData = JSON.parse(sender) as User;
 
-//       return {
-//         senderId,
-//         senderEmail: senderData.email,
-//       };
-//     })
-//   );
+      return {
+        senderId,
+        senderEmail: senderData.email,
+      };
+    })
+  );
 
   return (
     <div className="mt-4 py-5">
@@ -38,7 +38,7 @@ const page = async ({}) => {
       >
         Friend Requests
       </h1>
-      {/* <FriendRequestList incomingRequests={incomingFriendRequests} /> */}
+      <FriendRequestList incomingRequests={incomingFriendRequests} />
     </div>
   );
 };

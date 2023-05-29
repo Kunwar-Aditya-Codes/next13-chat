@@ -14,20 +14,18 @@ const dyna = DynaPuff({
 });
 
 interface SidebarProps {
-  // initialUnseenRequestsCount: number;
-  // sessionId: string;
+  initialUnseenRequestsCount: number;
+  sessionId: string;
 }
 
-const Sidebar: FC<SidebarProps> = (
-  {
-    // initialUnseenRequestsCount,
-    // sessionId,
-  }
-) => {
+const Sidebar: FC<SidebarProps> = ({
+  initialUnseenRequestsCount,
+  sessionId,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // const [unseenRequestsCount, setUnseenRequestsCount] = useState<number>(
-  //   initialUnseenRequestsCount
-  // );
+  const [unseenRequestsCount, setUnseenRequestsCount] = useState<number>(
+    initialUnseenRequestsCount
+  );
 
   return (
     <>
@@ -79,11 +77,11 @@ const Sidebar: FC<SidebarProps> = (
             {/* Notifications */}
             <Link href={"/dashboard/requests"} className="relative my-6">
               <BsBellFill className="h-8 w-8 rounded-lg bg-amber-600 p-2 text-white shadow-md" />
-              {/* {unseenRequestsCount > 0 && (
+              {unseenRequestsCount > 0 && (
                 <span className="absolute -top-1 left-6 w-4 rounded-full bg-white text-center text-xs ">
                   {unseenRequestsCount}
                 </span>
-              )} */}
+              )}
             </Link>
           </div>
 
