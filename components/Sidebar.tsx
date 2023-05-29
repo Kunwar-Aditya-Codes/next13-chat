@@ -8,6 +8,8 @@ import Link from "next/link";
 import { HiMenu } from "react-icons/hi";
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { BsBellFill } from "react-icons/bs";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const dyna = DynaPuff({
   subsets: ["latin"],
@@ -26,6 +28,13 @@ const Sidebar: FC<SidebarProps> = ({
   const [unseenRequestsCount, setUnseenRequestsCount] = useState<number>(
     initialUnseenRequestsCount
   );
+
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.push("/login");
+  };
 
   return (
     <>
@@ -58,9 +67,9 @@ const Sidebar: FC<SidebarProps> = ({
                 Kunwar Aditya
               </h1>
             </div>
-            <Link href={"/"} className="mr-2">
+            <button onClick={handleSignOut} className="mr-2">
               <IoExitOutline className="h-5 w-5 hover:text-amber-600" />
-            </Link>
+            </button>
           </div>
 
           <div className="flex items-center justify-evenly space-x-4  px-2">
