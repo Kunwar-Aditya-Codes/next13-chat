@@ -57,21 +57,31 @@ const AddFriend: FC<AddFriendProps> = ({}) => {
     });
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <input
-        {...register("email")}
-        type="text"
-        className="bg-black/30 px-4 py-2 m-6 rounded-xl w-fit text-white outline-none"
-      />
-      <button
-        type="submit"
-        className="bg-sky-600 px-4 py-2 rounded-md text-white"
+    <div>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-8 flex flex-col items-center space-y-4 px-4 sm:flex-row sm:space-x-8 sm:space-y-0 sm:px-0"
       >
-        Send Request
-      </button>
-
-      <div className="text-red-500">{errors.email?.message}</div>
-    </form>
+        <input
+          {...register("email")}
+          type="text"
+          placeholder="Ex. xyz@gmail.com"
+          autoFocus
+          className=" w-full rounded-lg px-4 py-2 shadow-md outline-amber-600 md:w-[45%]"
+        />
+        <button
+          type="submit"
+          className="rounded-md bg-black px-4 py-2 text-white"
+        >
+          Send Request
+        </button>
+      </form>
+      {errors.email && (
+        <div className="ml-1 mt-4 text-center text-sm font-medium text-red-500 sm:text-start">
+          **{errors.email?.message}
+        </div>
+      )}
+    </div>
   );
 };
 
