@@ -28,7 +28,7 @@ export default withAuth(
       return NextResponse.redirect(new URL("/login", req.url));
     }
 
-    if (pathname === "/") {
+    if (pathname === "/" && isAuth) {
       return NextResponse.redirect(new URL("/dashboard", req.url));
     }
   },

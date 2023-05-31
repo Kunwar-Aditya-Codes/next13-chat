@@ -67,7 +67,7 @@ const AddFriend: FC<AddFriendProps> = ({}) => {
           type="text"
           placeholder="Ex. xyz@gmail.com"
           autoFocus
-          className=" w-full rounded-lg px-4 py-2 shadow-md outline-amber-600 md:w-[45%]"
+          className=" w-full rounded-lg px-4 py-2 shadow-md outline-cyan-800 md:w-[45%]"
         />
         <button
           type="submit"

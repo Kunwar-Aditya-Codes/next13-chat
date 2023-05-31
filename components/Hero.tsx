@@ -16,8 +16,8 @@ const Hero: FC = () => {
         <h1
           className={`${dyna.className} items-center space-x-4 text-center text-4xl font-bold uppercase text-black sm:flex  md:text-start md:text-6xl lg:text-8xl `}
         >
-          <p className="first-letter:text-amber-600">Whisper</p>
-          <p className="first-letter:text-amber-600">Wire</p>
+          <p className="first-letter:text-cyan-800">Whisper</p>
+          <p className="first-letter:text-cyan-800">Wire</p>
         </h1>
 
         <Link

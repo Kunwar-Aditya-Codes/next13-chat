@@ -19,6 +19,7 @@
     "axios": "^1.4.0",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
+    "nanoid": "^4.0.2",
     "next": "13.4.3",
     "next-auth": "^4.22.1",
     "nextjs-progressbar": "^0.0.16",
@@ -28,6 +29,7 @@
     "react-hook-form": "^7.43.9",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
+    "react-textarea-autosize": "^8.4.1",
     "tailwindcss": "3.3.2",
     "typescript": "5.0.4",
     "zod": "^3.21.4"
