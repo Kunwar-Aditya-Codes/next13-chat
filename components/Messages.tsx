@@ -1,29 +1,81 @@
 "use client";
 import { Message } from "@/lib/validations/message";
 import { FC, useRef, useState } from "react";
+import Image from "next/image";
 
 interface MessagesProps {
   initialMessages: Message[];
   sessionId: string;
+  sessionImage: string;
+  chatPartnerImage: string;
 }
 
-// !Styling is not done yet
-
-const Messages: FC<MessagesProps> = ({ initialMessages, sessionId }) => {
+const Messages: FC<MessagesProps> = ({
+  initialMessages,
+  sessionId,
+  sessionImage,
+  chatPartnerImage,
+}) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
+  const formatTimeStamp = (timestamp: number) => {
+    return new Date(timestamp).toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  };
+
   return (
-    <div className="flex-grow">
+    <div className="mb-2 flex flex-grow flex-col-reverse px-2">
       <div ref={scrollRef} />
 
       {messages.map((message, index) => {
         const isCurrentUser = message.senderId === sessionId;
+
+        console.log(isCurrentUser);
         const hasNextMessageFromSameSender =
           messages[index - 1]?.senderId === messages[index]?.senderId;
         return (
-          <div key={`${message.id}-${message.timestamp}`}>
-            <div>{message.text}</div>
+          <div
+            key={`${message.id}-${message.timestamp} `}
+            className={`mb-6 flex items-end justify-end  ${
+              isCurrentUser ? "flex-row" : "flex-row-reverse"
+            }`}
+          >
+            <div
+              className={`flex flex-col  ${
+                isCurrentUser ? "items-end text-end" : "items-start"
+              }`}
+            >
+              <p
+                className={`
+              rounded-t-lg  px-4 py-1 text-lg 
+              ${
+                isCurrentUser
+                  ? " rounded-bl-lg  bg-cyan-800 text-white"
+                  : " rounded-br-lg bg-gray-200 "
+              }`}
+              >
+                {message.text}
+              </p>
+              <p className="text-xs">{formatTimeStamp(message.timestamp)}</p>
+            </div>
+            <div
+              className={`
+            flex-shrink-0
+            ${hasNextMessageFromSameSender ? "invisible" : "visible"}
+            `}
+            >
+              <Image
+                src={isCurrentUser ? sessionImage : chatPartnerImage}
+                alt="profile-image"
+                width={25}
+                height={25}
+                className={`rounded-full 
+                ${isCurrentUser ? "ml-3" : "mr-3"}`}
+              />
+            </div>
           </div>
         );
       })}

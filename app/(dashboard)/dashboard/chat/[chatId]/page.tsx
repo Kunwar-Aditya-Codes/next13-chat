@@ -82,7 +82,12 @@ const page = async ({ params }: pageProps) => {
         </div>
         {/* Chat */}
         <div className="flex h-full flex-grow flex-col overflow-y-scroll border-b-4 border-b-cyan-800 bg-white p-4  sm:rounded-b-lg">
-          <Messages initialMessages={initialMessages} sessionId={user.id} />
+          <Messages
+            initialMessages={initialMessages}
+            sessionId={user.id}
+            sessionImage={user.image as string}
+            chatPartnerImage={chatPartner.image}
+          />
           <ChatInput chatPartner={chatPartner} chatId={chatId} />
         </div>
       </div>
