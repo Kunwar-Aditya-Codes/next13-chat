@@ -1,24 +1,53 @@
 "use client";
 
 import axios from "axios";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { pusherClient } from "@/lib/pusher";
+import { toPusherKey } from "@/lib/utils";
 
 interface FriendRequestListProps {
-  incomingRequests: {
-    senderId: string;
-    senderEmail: string;
-  }[];
+  incomingRequests: FriendRequestProps[];
+  sessionId: string;
 }
+
+interface FriendRequestProps {
+  senderId: string;
+  senderEmail: string;
+}
+
 
 const FriendRequestList: FC<FriendRequestListProps> = ({
   incomingRequests,
+  sessionId,
 }) => {
   const [incomingFriendRequests, setIncomingFriendRequests] =
     useState(incomingRequests);
 
   const router = useRouter();
+
+  useEffect(() => {
+    pusherClient.subscribe(
+      toPusherKey(`user:${sessionId}:incoming_friend_requests`)
+    );
+
+    const friendRequestHandler = ({
+      senderId,
+      senderEmail,
+    }: FriendRequestProps) => {
+      setIncomingFriendRequests((prev) => [...prev, { senderId, senderEmail }]);
+    };
+
+    pusherClient.bind("incoming_friend_requests", friendRequestHandler);
+
+    return () => {
+      pusherClient.unsubscribe(
+        toPusherKey(`user:${sessionId}:incoming_friend_requests`)
+      );
+      pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
+    };
+  }, []);
 
   //*** Accept friend request
   const acceptFriendRequest = async (senderId: string) => {

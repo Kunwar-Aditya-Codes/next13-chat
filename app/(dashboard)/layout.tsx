@@ -18,7 +18,6 @@ interface layoutProps {
 const Layout = async ({ children }: layoutProps) => {
   const session = await getServerSession(authOptions);
 
-  console.log(session);
 
   if (!session) notFound();
 

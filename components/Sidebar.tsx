@@ -1,6 +1,6 @@
 "use client";
 import { AiOutlineClose, AiFillHome } from "react-icons/ai";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { DynaPuff } from "next/font/google";
 import { IoExitOutline } from "react-icons/io5";
@@ -12,6 +12,8 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import ChatList from "./ChatList";
 import Image from "next/image";
+import { pusherClient } from "@/lib/pusher";
+import { toPusherKey } from "@/lib/utils";
 
 const dyna = DynaPuff({
   subsets: ["latin"],
@@ -42,6 +44,25 @@ const Sidebar: FC<SidebarProps> = ({
     await signOut();
     router.push("/login");
   };
+
+  useEffect(() => {
+    pusherClient.subscribe(
+      toPusherKey(`user:${session.user.id}:incoming_friend_requests`)
+    );
+
+    const friendRequestHandler = () => {
+      setUnseenRequestsCount((prev) => prev + 1);
+    };
+
+    pusherClient.bind("incoming_friend_requests", friendRequestHandler);
+
+    return () => {
+      pusherClient.unsubscribe(
+        toPusherKey(`user:${session.user.id}:incoming_friend_requests`)
+      );
+      pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
+    };
+  }, []);
 
   return (
     <>

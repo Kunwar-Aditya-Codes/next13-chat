@@ -38,7 +38,10 @@ const page = async ({}) => {
       >
         Friend Requests
       </h1>
-      <FriendRequestList incomingRequests={incomingFriendRequests} />
+      <FriendRequestList
+        incomingRequests={incomingFriendRequests}
+        sessionId={session.user.id}
+      />
     </div>
   );
 };

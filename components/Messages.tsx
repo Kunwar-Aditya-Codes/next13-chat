@@ -1,12 +1,15 @@
 "use client";
 import { Message } from "@/lib/validations/message";
-import { FC, useRef, useState } from "react";
+import { FC, useRef, useState, useEffect } from "react";
 import Image from "next/image";
+import { pusherClient } from "@/lib/pusher";
+import { toPusherKey } from "@/lib/utils";
 
 interface MessagesProps {
   initialMessages: Message[];
   sessionId: string;
   sessionImage: string;
+  chatId: string;
   chatPartnerImage: string;
 }
 
@@ -14,6 +17,7 @@ const Messages: FC<MessagesProps> = ({
   initialMessages,
   sessionId,
   sessionImage,
+  chatId,
   chatPartnerImage,
 }) => {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
@@ -26,6 +30,21 @@ const Messages: FC<MessagesProps> = ({
     });
   };
 
+  useEffect(() => {
+    pusherClient.subscribe(toPusherKey(`chat:${chatId}`));
+
+    const messageHandler = (message: Message) => {
+      setMessages((prev) => [message, ...prev]);
+    };
+
+    pusherClient.bind("incoming_message", messageHandler);
+
+    return () => {
+      pusherClient.unsubscribe(toPusherKey(`chat:${chatId}`));
+      pusherClient.unbind("incoming_message", messageHandler);
+    };
+  }, []);
+
   return (
     <div className="mb-2 flex flex-grow flex-col-reverse px-2">
       <div ref={scrollRef} />
@@ -33,7 +52,6 @@ const Messages: FC<MessagesProps> = ({
       {messages.map((message, index) => {
         const isCurrentUser = message.senderId === sessionId;
 
-        console.log(isCurrentUser);
         const hasNextMessageFromSameSender =
           messages[index - 1]?.senderId === messages[index]?.senderId;
         return (
