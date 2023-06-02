@@ -14,6 +14,7 @@ type FormData = z.infer<typeof addFriendValidator>;
 const AddFriend: FC<AddFriendProps> = ({}) => {
   const {
     register,
+    reset,
     handleSubmit,
     setError,
     formState: { errors },
@@ -30,6 +31,9 @@ const AddFriend: FC<AddFriendProps> = ({}) => {
       });
 
       toast.success("Request sent!");
+
+      // reset form
+      reset();
     } catch (error) {
       if (error instanceof z.ZodError) {
         setError("email", {

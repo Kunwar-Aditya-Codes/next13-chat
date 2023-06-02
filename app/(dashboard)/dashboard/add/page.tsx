@@ -12,7 +12,7 @@ const page: FC = ({}) => {
       <h1
         className={`${dyna.className} text-center text-2xl font-bold uppercase tracking-widest sm:text-start lg:text-4xl`}
       >
-        Friend Requests
+        Add Friend
       </h1>
       <AddFriend />
     </div>

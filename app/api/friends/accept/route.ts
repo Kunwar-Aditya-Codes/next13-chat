@@ -4,6 +4,8 @@ import { z } from "zod";
 import { NextResponse } from "next/server";
 import { fetchRedis } from "@/lib/helpers/redis";
 import { db } from "@/lib/db";
+import { pusherServer } from "@/lib/pusher";
+import { toPusherKey } from "@/lib/utils";
 
 export async function POST(req: Request) {
   try {
@@ -41,9 +43,28 @@ export async function POST(req: Request) {
       return NextResponse.json("No friend request", { status: 400 });
     }
 
+    const [userRaw, friendRaw] = (await Promise.all([
+      fetchRedis("get", `user:${session.user.id}`),
+      fetchRedis("get", `user:${idToAdd}`),
+    ])) as [string, string];
+
+    const user = JSON.parse(userRaw) as User;
+    const friend = JSON.parse(friendRaw) as User;
+
+    await pusherServer.trigger(
+      toPusherKey(`user:${idToAdd}:friends`),
+      "new_friend",
+      user
+    );
+
+    await pusherServer.trigger(
+      toPusherKey(`user:${session.user.id}:friends`),
+      "new_friend",
+      friend
+    );
+
     await db.sadd(`user:${session.user.id}:friends`, idToAdd);
     await db.sadd(`user:${idToAdd}:friends`, session.user.id);
-
     await db.srem(`user:${session.user.id}:incoming_friend_requests`, idToAdd);
 
     return NextResponse.json("Friend added", { status: 200 });

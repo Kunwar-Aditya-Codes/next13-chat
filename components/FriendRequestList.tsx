@@ -17,7 +17,6 @@ interface FriendRequestProps {
   senderEmail: string;
 }
 
-
 const FriendRequestList: FC<FriendRequestListProps> = ({
   incomingRequests,
   sessionId,
@@ -47,7 +46,7 @@ const FriendRequestList: FC<FriendRequestListProps> = ({
       );
       pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
     };
-  }, []);
+  }, [sessionId]);
 
   //*** Accept friend request
   const acceptFriendRequest = async (senderId: string) => {

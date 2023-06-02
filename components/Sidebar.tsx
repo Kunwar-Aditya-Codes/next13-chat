@@ -8,7 +8,7 @@ import { HiMenu } from "react-icons/hi";
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { BsBellFill } from "react-icons/bs";
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import ChatList from "./ChatList";
 import Image from "next/image";
 import { pusherClient } from "@/lib/pusher";
@@ -38,6 +38,7 @@ const Sidebar: FC<SidebarProps> = ({
   );
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSignOut = async () => {
     await signOut();
@@ -45,23 +46,35 @@ const Sidebar: FC<SidebarProps> = ({
   };
 
   useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     pusherClient.subscribe(
       toPusherKey(`user:${session.user.id}:incoming_friend_requests`)
     );
+    pusherClient.subscribe(toPusherKey(`user:${session.user.id}:friends`));
 
     const friendRequestHandler = () => {
       setUnseenRequestsCount((prev) => prev + 1);
     };
 
+    const addedFriendHandler = () => {
+      setUnseenRequestsCount((prev) => prev - 1);
+    };
+
     pusherClient.bind("incoming_friend_requests", friendRequestHandler);
+    pusherClient.bind("new_friend", addedFriendHandler);
 
     return () => {
       pusherClient.unsubscribe(
         toPusherKey(`user:${session.user.id}:incoming_friend_requests`)
       );
+      pusherClient.unsubscribe(toPusherKey(`user:${session.user.id}:friends`));
       pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
+      pusherClient.unbind("new_friend", addedFriendHandler);
     };
-  }, []);
+  }, [session.user.id]);
 
   return (
     <>

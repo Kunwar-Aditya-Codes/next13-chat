@@ -17,6 +17,7 @@ interface ExtendedMessage extends Message {
 
 const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
   const [unseenMessages, setUnseenMessages] = useState<Message[]>([]);
+  const [activeChats, setActiveChats] = useState<User[]>(friends);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -24,8 +25,9 @@ const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`));
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`));
 
-    const newFriendHandler = () => {
-      router.refresh();
+    const newFriendHandler = (newFriend: User) => {
+      console.log("new friend");
+      setActiveChats((prev) => [...prev, newFriend]);
     };
 
     const chatHandler = (message: ExtendedMessage) => {
@@ -59,7 +61,7 @@ const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 
   return (
     <div className="mt-6">
-      {friends.sort().map((friend) => {
+      {activeChats.sort().map((friend) => {
         const unseenMessagesCount = unseenMessages.filter(
           (message) => message.senderId === friend.id
         ).length;

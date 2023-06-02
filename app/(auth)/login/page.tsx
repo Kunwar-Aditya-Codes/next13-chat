@@ -11,7 +11,7 @@ const alk = Alkatra({
   subsets: ["latin"],
 });
 
-const page: FC = ({}) => {
+const Page: FC = () => {
   const [loading, setLoading] = useState(false);
 
   const handleGoogleLogin = async () => {
@@ -45,4 +45,4 @@ const page: FC = ({}) => {
   );
 };
 
-export default page;
+export default Page;

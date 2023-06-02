@@ -61,8 +61,7 @@ export async function POST(req: Request) {
     }
 
     // Send the friend request
-
-    pusherServer.trigger(
+    await pusherServer.trigger(
       toPusherKey(`user:${idToAdd}:incoming_friend_requests`),
       "incoming_friend_requests",
       {
@@ -71,7 +70,7 @@ export async function POST(req: Request) {
       }
     );
 
-    db.sadd(`user:${idToAdd}:incoming_friend_requests`, session.user.id);
+    await db.sadd(`user:${idToAdd}:incoming_friend_requests`, session.user.id);
 
     return NextResponse.json("OK", { status: 200 });
   } catch (error) {
