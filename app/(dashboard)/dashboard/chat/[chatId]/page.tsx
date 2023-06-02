@@ -63,7 +63,7 @@ const page = async ({ params }: pageProps) => {
   const initialMessages = await getChatMessages(chatId);
 
   return (
-    <div className="h-full sm:p-4">
+    <div className="h-full  sm:p-4">
       <div className="flex h-full flex-col">
         {/* Topbar */}
         <div className="flex items-center space-x-4 bg-cyan-800 px-4 py-[1.15rem] sm:rounded-lg sm:rounded-b-none">
@@ -81,7 +81,7 @@ const page = async ({ params }: pageProps) => {
           </h1>
         </div>
         {/* Chat */}
-        <div className="flex h-full flex-grow flex-col overflow-y-scroll border-b-4 border-b-cyan-800 bg-white p-4  sm:rounded-b-lg">
+        <div className="flex flex-col overflow-hidden border-b-4 border-b-cyan-800 bg-white p-4 sm:rounded-b-lg">
           <Messages
             initialMessages={initialMessages}
             sessionId={user.id}

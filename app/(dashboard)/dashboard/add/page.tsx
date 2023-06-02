@@ -6,9 +6,7 @@ const dyna = DynaPuff({
   subsets: ["latin"],
 });
 
-interface pageProps {}
-
-const page: FC<pageProps> = ({}) => {
+const page: FC = ({}) => {
   return (
     <div className="mt-4 py-5">
       <h1

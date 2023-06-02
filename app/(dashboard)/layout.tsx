@@ -18,7 +18,6 @@ interface layoutProps {
 const Layout = async ({ children }: layoutProps) => {
   const session = await getServerSession(authOptions);
 
-
   if (!session) notFound();
 
   const friends = await getFriendsByUserId(session.user.id);

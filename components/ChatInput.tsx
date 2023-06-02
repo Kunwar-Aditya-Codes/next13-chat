@@ -18,6 +18,11 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
 
   const sendMessage = async () => {
     setLoading(true);
+
+    if (!input) {
+      return;
+    }
+
     await axios.post("/api/message/add", {
       text: input,
       chatId,

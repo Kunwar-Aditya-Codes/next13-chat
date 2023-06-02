@@ -61,6 +61,12 @@ export async function POST(req: Request) {
       message
     );
 
+    pusherServer.trigger(toPusherKey(`user:${friendId}:chats`), "new_message", {
+      ...message,
+      senderImage: sender.image,
+      senderName: sender.name,
+    });
+
     await db.zadd(`chat:${chatId}:messages`, {
       score: timestamp,
       member: JSON.stringify(message),

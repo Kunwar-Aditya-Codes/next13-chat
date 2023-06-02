@@ -46,7 +46,7 @@ const Messages: FC<MessagesProps> = ({
   }, []);
 
   return (
-    <div className="mb-2 flex flex-grow flex-col-reverse px-2">
+    <div className="mb-2 flex flex-grow flex-col-reverse overflow-y-scroll  px-2">
       <div ref={scrollRef} />
 
       {messages.map((message, index) => {

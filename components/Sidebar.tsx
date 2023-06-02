@@ -1,7 +1,6 @@
 "use client";
 import { AiOutlineClose, AiFillHome } from "react-icons/ai";
 import { FC, useEffect, useState } from "react";
-import { FaUserCircle } from "react-icons/fa";
 import { DynaPuff } from "next/font/google";
 import { IoExitOutline } from "react-icons/io5";
 import Link from "next/link";
