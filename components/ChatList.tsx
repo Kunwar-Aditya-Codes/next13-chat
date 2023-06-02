@@ -17,18 +17,18 @@ interface ExtendedMessage extends Message {
 
 const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
   const [unseenMessages, setUnseenMessages] = useState<Message[]>([]);
-  const [activeChats, setActiveChats] = useState<User[]>(friends);
+  // const [activeChats, setActiveChats] = useState<User[]>(friends);
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`));
-    pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`));
+    // pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`));
 
-    const newFriendHandler = (newFriend: User) => {
-      console.log("new friend");
-      setActiveChats((prev) => [...prev, newFriend]);
-    };
+    // const newFriendHandler = (newFriend: User) => {
+    //   console.log("new friend");
+    //   setActiveChats((prev) => [...prev, newFriend]);
+    // };
 
     const chatHandler = (message: ExtendedMessage) => {
       const shouldNotify =
@@ -41,13 +41,13 @@ const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
     };
 
     pusherClient.bind("new_message", chatHandler);
-    pusherClient.bind("new_friend", newFriendHandler);
+    // pusherClient.bind("new_friend", newFriendHandler);
 
     return () => {
       pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:chats`));
       pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:friends`));
       pusherClient.unbind("new_message", chatHandler);
-      pusherClient.unbind("new_friend", newFriendHandler);
+      // pusherClient.unbind("new_friend", newFriendHandler);
     };
   }, [pathname, router, sessionId]);
 
@@ -61,7 +61,7 @@ const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
 
   return (
     <div className="mt-6">
-      {activeChats.sort().map((friend) => {
+      {friends.sort().map((friend) => {
         const unseenMessagesCount = unseenMessages.filter(
           (message) => message.senderId === friend.id
         ).length;

@@ -54,17 +54,23 @@ const page = async ({ params }: pageProps) => {
   const [userId1, userId2] = chatId.split("--");
 
   if (userId1 !== user.id && userId2 !== user.id) {
-    return notFound();
+    notFound();
   }
 
   const chatPartnerId = user.id === userId1 ? userId2 : userId1;
 
-  const chatPartner = (await db.get(`user:${chatPartnerId}`)) as User;
+  const chatPartnerRaw = (await fetchRedis(
+    "get",
+    `user:${chatPartnerId}`
+  )) as string;
+  const chatPartner = JSON.parse(chatPartnerRaw) as User;
+
+  // const chatPartner = (await db.get(`user:${chatPartnerId}`)) as User;
   const initialMessages = await getChatMessages(chatId);
 
   return (
-    <div className="h-full  sm:p-4">
-      <div className="flex h-full flex-col">
+    <div className="h-screen sm:p-4">
+      <div className="flex h-[95%] flex-col sm:h-full">
         {/* Topbar */}
         <div className="flex items-center space-x-4 bg-cyan-800 px-4 py-[1.15rem] sm:rounded-lg sm:rounded-b-none">
           <Image
@@ -81,7 +87,7 @@ const page = async ({ params }: pageProps) => {
           </h1>
         </div>
         {/* Chat */}
-        <div className="flex flex-col overflow-hidden border-b-4 border-b-cyan-800 bg-white p-4 sm:rounded-b-lg">
+        <div className="flex flex-grow flex-col overflow-hidden border-b-4 border-b-cyan-800 bg-white p-4 sm:mb-0 sm:rounded-b-lg">
           <Messages
             initialMessages={initialMessages}
             sessionId={user.id}

@@ -20,6 +20,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
     setLoading(true);
 
     if (!input) {
+      setLoading(false);
       return;
     }
 

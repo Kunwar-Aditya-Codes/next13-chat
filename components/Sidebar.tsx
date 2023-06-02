@@ -37,6 +37,12 @@ const Sidebar: FC<SidebarProps> = ({
     initialUnseenRequestsCount
   );
 
+  // New
+  const [activeChats, setActiveChats] = useState<User[]>(friends);
+
+  console.log("activeChats from sidebar", activeChats);
+  console.log("friends from sidebar", friends);
+
   const router = useRouter();
   const pathname = usePathname();
 
@@ -63,8 +69,16 @@ const Sidebar: FC<SidebarProps> = ({
       setUnseenRequestsCount((prev) => prev - 1);
     };
 
+    // New
+    const newFriendHandler = (newFriend: User) => {
+      console.log("new friend");
+      setActiveChats((prev) => [...prev, newFriend]);
+    };
+
     pusherClient.bind("incoming_friend_requests", friendRequestHandler);
     pusherClient.bind("new_friend", addedFriendHandler);
+    // New
+    pusherClient.bind("new_friend", newFriendHandler);
 
     return () => {
       pusherClient.unsubscribe(
@@ -73,6 +87,8 @@ const Sidebar: FC<SidebarProps> = ({
       pusherClient.unsubscribe(toPusherKey(`user:${session.user.id}:friends`));
       pusherClient.unbind("incoming_friend_requests", friendRequestHandler);
       pusherClient.unbind("new_friend", addedFriendHandler);
+      // New
+      pusherClient.unbind("new_friend", newFriendHandler);
     };
   }, [session.user.id]);
 
@@ -143,12 +159,12 @@ const Sidebar: FC<SidebarProps> = ({
           </div>
 
           {/* Lists */}
-          {friends.length > 0 && (
+          {activeChats.length > 0 && (
             <div className="my-4">
               <h1 className="text-center text-sm font-extrabold uppercase tracking-widest text-cyan-800">
                 Chats
               </h1>
-              <ChatList friends={friends} sessionId={session.user.id} />
+              <ChatList friends={activeChats} sessionId={session.user.id} />
             </div>
           )}
         </div>

@@ -7,11 +7,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-hot-toast";
 import { FC } from "react";
 
-interface AddFriendProps {}
-
 type FormData = z.infer<typeof addFriendValidator>;
 
-const AddFriend: FC<AddFriendProps> = ({}) => {
+const AddFriend: FC = ({}) => {
   const {
     register,
     reset,
@@ -56,9 +54,7 @@ const AddFriend: FC<AddFriendProps> = ({}) => {
   };
 
   const onSubmit = (data: FormData) => {
-    addFriend(data.email).catch((error) => {
-      console.error(error);
-    });
+    addFriend(data.email);
   };
   return (
     <div>

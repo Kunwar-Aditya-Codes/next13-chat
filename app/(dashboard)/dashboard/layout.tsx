@@ -1,5 +1,5 @@
 import Sidebar from "@/components/Sidebar";
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { notFound } from "next/navigation";
 import { fetchRedis } from "@/lib/helpers/redis";
