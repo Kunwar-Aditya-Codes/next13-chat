@@ -17,18 +17,11 @@ interface ExtendedMessage extends Message {
 
 const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
   const [unseenMessages, setUnseenMessages] = useState<Message[]>([]);
-  // const [activeChats, setActiveChats] = useState<User[]>(friends);
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
     pusherClient.subscribe(toPusherKey(`user:${sessionId}:chats`));
-    // pusherClient.subscribe(toPusherKey(`user:${sessionId}:friends`));
-
-    // const newFriendHandler = (newFriend: User) => {
-    //   console.log("new friend");
-    //   setActiveChats((prev) => [...prev, newFriend]);
-    // };
 
     const chatHandler = (message: ExtendedMessage) => {
       const shouldNotify =
@@ -41,13 +34,11 @@ const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
     };
 
     pusherClient.bind("new_message", chatHandler);
-    // pusherClient.bind("new_friend", newFriendHandler);
 
     return () => {
       pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:chats`));
       pusherClient.unsubscribe(toPusherKey(`user:${sessionId}:friends`));
       pusherClient.unbind("new_message", chatHandler);
-      // pusherClient.unbind("new_friend", newFriendHandler);
     };
   }, [pathname, router, sessionId]);
 
@@ -67,13 +58,13 @@ const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
         ).length;
 
         return (
-          <li key={friend.id} className="mb-4 list-none border-b-2  ">
+          <li key={friend.id} className="mb-4 list-none  text-white ">
             <a
               href={`/dashboard/chat/${chatHrefConstructor(
                 sessionId,
                 friend.id
               )}`}
-              className="flex items-center space-x-4 p-4 transition-colors ease-out hover:bg-white/30 hover:text-cyan-800 "
+              className="flex items-center space-x-4 p-4 transition-colors ease-out hover:bg-[#353941] hover:text-green-400 "
             >
               <Image
                 alt="profile-image"
@@ -85,7 +76,7 @@ const ChatList: FC<ChatListProps> = ({ friends, sessionId }) => {
               <h1 className=" flex items-center font-light uppercase tracking-widest md:text-lg">
                 {friend.name}
                 {unseenMessagesCount > 0 && (
-                  <p className="ml-4 rounded-lg bg-cyan-800 px-2  text-sm text-white">
+                  <p className="ml-4 rounded-lg  bg-green-400  px-2 text-sm text-black">
                     {unseenMessagesCount}
                   </p>
                 )}

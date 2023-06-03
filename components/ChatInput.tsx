@@ -39,12 +39,13 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
   };
 
   return (
-    <div className="flex items-center rounded-lg border-2 focus-within:border-cyan-800">
+    <div className="flex items-center rounded-lg  ">
       <TextareaAutosize
         ref={textAreaRef}
-        className="w-full rounded-lg rounded-r-none  p-2 shadow-md outline-none focus-within:border-cyan-800"
+        className="w-full rounded-lg rounded-r-none bg-[#343941] px-2 py-3 text-white shadow-md outline-none "
         placeholder={`Message ${chatPartner.name}`}
         value={input}
+        autoFocus
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => {
           if (e.key === "Enter" && !e.shiftKey) {
@@ -56,7 +57,7 @@ const ChatInput: FC<ChatInputProps> = ({ chatPartner, chatId }) => {
       />
       <button
         onClick={sendMessage}
-        className="flex h-full w-[4rem] items-center justify-center rounded-r-lg border-2  bg-cyan-800 p-2 text-base text-white shadow-md"
+        className="flex h-full w-[4rem] items-center justify-center rounded-r-lg   bg-green-400  p-2 text-base text-white shadow-md"
       >
         {loading ? (
           <AiOutlineLoading3Quarters className=" h-5 w-5 animate-spin" />

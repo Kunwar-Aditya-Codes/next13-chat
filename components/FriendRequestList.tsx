@@ -79,13 +79,13 @@ const FriendRequestList: FC<FriendRequestListProps> = ({
       {incomingFriendRequests.map((request) => (
         <div
           key={request.senderId}
-          className="m-4 flex flex-col items-center justify-evenly space-y-3 rounded-lg bg-white py-3 text-center text-sm shadow-md hover:shadow-lg sm:mx-0 sm:w-[70%] sm:flex-row sm:justify-between sm:space-y-0 sm:px-4 sm:text-base md:text-lg lg:w-[50%]"
+          className="m-4 flex flex-col items-center justify-evenly space-y-3 rounded-lg bg-[#343941] py-3 text-center text-sm text-white shadow-md hover:shadow-lg sm:mx-0 sm:w-[70%] sm:flex-row sm:justify-between sm:space-y-0 sm:px-4 sm:text-base md:text-lg lg:w-[50%]"
         >
           <p className="md:font-light">{request.senderEmail}</p>
           <div className="flex items-center space-x-6">
             <AiFillCheckCircle
               onClick={() => acceptFriendRequest(request.senderId)}
-              className="h-7 w-7 cursor-pointer text-green-500  md:h-8 md:w-8"
+              className="h-7 w-7 cursor-pointer text-green-400  md:h-8 md:w-8"
             />
             <AiFillCloseCircle
               onClick={() => rejectFriendRequest(request.senderId)}

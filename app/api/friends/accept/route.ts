@@ -64,8 +64,7 @@ export async function POST(req: Request) {
         friend
       ),
 
-      console.log("session user >> ", session.user.id),
-      console.log("idToAdd >> ", idToAdd),
+     
       db.sadd(`user:${session.user.id}:friends`, idToAdd),
       db.sadd(`user:${idToAdd}:friends`, session.user.id),
       db.srem(`user:${session.user.id}:incoming_friend_requests`, idToAdd),

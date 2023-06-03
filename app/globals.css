@@ -2,7 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 222831 */
-/* 393E46 */
-/* 00ADB5 */
-/* EEEEEE */
+.scrollbar-w-2::-webkit-scrollbar {
+  width: 0.25rem;
+  height: 0.25rem;
+  border-radius: 100%;
+}
+
+.scrollbar-w-2::-webkit-scrollbar-track {
+  background: #343941;
+}
+
+.scrollbar-w-2::-webkit-scrollbar-thumb {
+  background: #ffffff;
+}

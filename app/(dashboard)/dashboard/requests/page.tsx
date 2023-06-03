@@ -34,7 +34,7 @@ const page = async ({}) => {
   return (
     <div className="mt-4 py-5">
       <h1
-        className={`${dyna.className} text-center text-2xl font-bold uppercase tracking-widest sm:text-start lg:text-4xl`}
+        className={`${dyna.className} text-center text-2xl font-bold uppercase tracking-widest text-white sm:text-start lg:text-4xl`}
       >
         Friend Requests
       </h1>

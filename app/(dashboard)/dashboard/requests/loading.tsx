@@ -3,8 +3,14 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const loading = ({}) => {
   return (
-    <div className="flex h-screen items-center justify-center">
+    <div className="mt-4 py-5">
       <Skeleton width={"20rem"} height={60} baseColor="#343941" />
+      <Skeleton
+        width={"30rem"}
+        height={40}
+        baseColor="#343941"
+        className="mt-4"
+      />
     </div>
   );
 };

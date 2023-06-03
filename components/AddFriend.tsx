@@ -67,11 +67,11 @@ const AddFriend: FC = ({}) => {
           type="text"
           placeholder="Ex. xyz@gmail.com"
           autoFocus
-          className=" w-full rounded-lg px-4 py-2 shadow-md outline-cyan-800 md:w-[45%]"
+          className=" w-full rounded-lg bg-[#343941] px-4 py-2 text-white shadow-md outline-none md:w-[45%]"
         />
         <button
           type="submit"
-          className="rounded-md bg-black px-4 py-2 text-white"
+          className="rounded-md bg-[#343941] px-4 py-2 font-medium uppercase tracking-widest text-green-400"
         >
           Send Request
         </button>

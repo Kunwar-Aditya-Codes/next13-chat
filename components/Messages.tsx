@@ -46,7 +46,7 @@ const Messages: FC<MessagesProps> = ({
   }, [chatId]);
 
   return (
-    <div className="mb-2 flex flex-grow flex-col-reverse overflow-y-scroll  px-2">
+    <div className=" scrollbar-w-2 mb-8 flex flex-grow flex-col-reverse overflow-y-scroll  px-2">
       <div ref={scrollRef} />
 
       {messages.map((message, index) => {
@@ -58,11 +58,11 @@ const Messages: FC<MessagesProps> = ({
           <div
             key={`${message.id}-${message.timestamp} `}
             className={`mb-6 flex items-end justify-end  ${
-              isCurrentUser ? "flex-row" : "flex-row-reverse"
+              isCurrentUser ? "mr-[1rem] flex-row" : "  flex-row-reverse"
             }`}
           >
             <div
-              className={`flex flex-col  ${
+              className={`flex flex-col space-y-1  ${
                 isCurrentUser ? "items-end text-end" : "items-start"
               }`}
             >
@@ -71,13 +71,15 @@ const Messages: FC<MessagesProps> = ({
               rounded-t-lg  px-4 py-1 text-lg 
               ${
                 isCurrentUser
-                  ? " rounded-bl-lg  bg-cyan-800 text-white"
+                  ? " rounded-bl-lg  bg-[#343941] text-white"
                   : " rounded-br-lg bg-gray-200 "
               }`}
               >
                 {message.text}
               </p>
-              <p className="text-xs">{formatTimeStamp(message.timestamp)}</p>
+              <p className="text-xs text-white">
+                {formatTimeStamp(message.timestamp)}
+              </p>
             </div>
             <div
               className={`
