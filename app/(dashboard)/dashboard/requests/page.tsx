@@ -3,11 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { notFound } from "next/navigation";
 import { fetchRedis } from "@/lib/helpers/redis";
 import FriendRequestList from "@/components/FriendRequestList";
-import { DynaPuff } from "next/font/google";
-
-const dyna = DynaPuff({
-  subsets: ["latin"],
-});
+import { dyna } from "@/lib/utils";
 
 const page = async ({}) => {
   const session = await getServerSession(authOptions);

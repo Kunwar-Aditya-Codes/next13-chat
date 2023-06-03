@@ -1,8 +1,4 @@
-import { DynaPuff } from "next/font/google";
-
-const dyna = DynaPuff({
-  subsets: ["latin"],
-});
+import { dyna } from "@/lib/utils";
 
 const page = async ({}) => {
   return (

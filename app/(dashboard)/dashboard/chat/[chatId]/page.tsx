@@ -4,19 +4,15 @@ import { messageArrayValidator } from "@/lib/validations/message";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { DynaPuff } from "next/font/google";
 import Messages from "@/components/Messages";
 import ChatInput from "@/components/ChatInput";
+import { dyna } from "@/lib/utils";
 
 interface pageProps {
   params: {
     chatId: string;
   };
 }
-
-const dyna = DynaPuff({
-  subsets: ["latin"],
-});
 
 async function getChatMessages(chatId: string) {
   try {

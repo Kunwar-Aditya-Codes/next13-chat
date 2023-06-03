@@ -1,10 +1,6 @@
 import AddFriend from "@/components/AddFriend";
+import { dyna } from "@/lib/utils";
 import { FC } from "react";
-import { DynaPuff } from "next/font/google";
-
-const dyna = DynaPuff({
-  subsets: ["latin"],
-});
 
 const page: FC = ({}) => {
   return (

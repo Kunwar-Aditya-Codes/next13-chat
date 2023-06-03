@@ -8,5 +8,22 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div className=" ">{children}</div>;
+  return (
+    <div>
+      {children}
+      <footer>
+        <h1 className="absolute bottom-4 right-4 z-[10000] text-white">
+          &copy; {new Date().getFullYear()}
+          <a
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+            className="ml-1 text-green-400 hover:underline hover:underline-offset-2"
+          >
+            Kunwar Aditya
+          </a>
+        </h1>
+      </footer>
+    </div>
+  );
 }

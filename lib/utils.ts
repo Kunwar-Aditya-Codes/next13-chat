@@ -6,3 +6,9 @@ export function chatHrefConstructor(id1: string, id2: string) {
 export function toPusherKey(key: string) {
   return key.replace(/:/g, "__");
 }
+
+import { DynaPuff } from "next/font/google";
+
+export const dyna = DynaPuff({
+  subsets: ["latin"],
+});

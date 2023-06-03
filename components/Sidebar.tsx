@@ -1,7 +1,6 @@
 "use client";
 import { AiOutlineClose, AiFillHome } from "react-icons/ai";
 import { FC, useEffect, useState } from "react";
-import { DynaPuff } from "next/font/google";
 import { IoExitOutline } from "react-icons/io5";
 import Link from "next/link";
 import { HiMenu } from "react-icons/hi";
@@ -12,11 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import ChatList from "./ChatList";
 import Image from "next/image";
 import { pusherClient } from "@/lib/pusher";
-import { toPusherKey } from "@/lib/utils";
-
-const dyna = DynaPuff({
-  subsets: ["latin"],
-});
+import { dyna, toPusherKey } from "@/lib/utils";
 
 interface SidebarProps {
   initialUnseenRequestsCount: number;

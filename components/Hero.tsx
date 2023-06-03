@@ -2,16 +2,12 @@ import { FC } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import hero from "@/public/hero4.png";
-import { DynaPuff } from "next/font/google";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
-
-const dyna = DynaPuff({
-  subsets: ["latin"],
-});
+import { dyna } from "@/lib/utils";
 
 const Hero: FC = () => {
   return (
-    <section className="flex h-screen flex-col">
+    <section className="flex h-screen flex-col bg-[url('/back3.svg')] bg-cover bg-center bg-no-repeat">
       <div className="flex flex-[0.5] flex-col items-center justify-center space-y-12  p-4 ">
         <h1
           className={`${dyna.className} items-center space-x-4 text-center text-4xl font-bold uppercase text-white sm:flex  md:text-start md:text-6xl lg:text-8xl `}
