@@ -90,7 +90,7 @@ const Sidebar: FC<SidebarProps> = ({
 
   return (
     <>
-      <div className="m-1  px-4 py-2">
+      <div className="m-1 px-4 py-2">
         <HiMenu
           className="h-7 w-7 cursor-pointer rounded-lg bg-[#353941] p-1 text-white sm:hidden"
           onClick={() => setIsOpen(!isOpen)}
@@ -99,7 +99,7 @@ const Sidebar: FC<SidebarProps> = ({
       <div
         className={`${
           isOpen ? "translate-x-0" : "-translate-x-full"
-        } absolute z-50 h-full w-full transition-all duration-[250ms] ease-out sm:relative sm:m-4 sm:h-auto sm:flex-[0.3] sm:translate-x-0 lg:flex-[0.25]`}
+        } absolute z-50 h-full w-full transition-all  duration-[250ms] ease-out sm:relative sm:m-4 sm:h-[91%] sm:flex-[0.3] sm:translate-x-0 lg:flex-[0.25]`}
       >
         <div className="h-full w-full border-b-4 border-black border-b-[#353941] bg-[#26282b] py-2  shadow-2xl sm:rounded-md sm:py-0">
           <div className="mx-4 flex items-center justify-end text-end ">

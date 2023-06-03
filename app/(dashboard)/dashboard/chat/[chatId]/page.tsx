@@ -1,5 +1,4 @@
 import { authOptions } from "@/lib/auth";
-import { db } from "@/lib/db";
 import { fetchRedis } from "@/lib/helpers/redis";
 import { messageArrayValidator } from "@/lib/validations/message";
 import { getServerSession } from "next-auth";
@@ -68,8 +67,8 @@ const page = async ({ params }: pageProps) => {
   const initialMessages = await getChatMessages(chatId);
 
   return (
-    <div className="h-screen sm:p-4">
-      <div className="flex h-[95%] flex-col shadow-2xl sm:h-full">
+    <div className="h-[96%] sm:m-4 sm:h-full ">
+      <div className="flex h-full flex-col  shadow-2xl sm:h-full">
         {/* Topbar */}
         <div className="flex items-center space-x-4 bg-[#343941] px-4 py-[1.15rem] sm:rounded-lg sm:rounded-b-none">
           <Image
@@ -86,7 +85,7 @@ const page = async ({ params }: pageProps) => {
           </h1>
         </div>
         {/* Chat */}
-        <div className="flex flex-grow flex-col overflow-hidden border-b-4 border-b-[#343941] bg-[#26282b] p-4 sm:mb-0 sm:rounded-b-lg">
+        <div className="flex flex-grow flex-col overflow-hidden border-b-4 border-b-[#343941] bg-[#26282b] p-4 sm:rounded-b-lg">
           <Messages
             initialMessages={initialMessages}
             sessionId={user.id}

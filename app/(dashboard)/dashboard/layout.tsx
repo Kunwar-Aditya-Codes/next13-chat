@@ -30,13 +30,13 @@ const Layout = async ({ children }: layoutProps) => {
   ).length;
 
   return (
-    <div className="relative flex h-screen w-full flex-col overflow-hidden sm:flex-row">
+    <div className="relative flex h-screen w-full flex-col overflow-hidden sm:flex-row ">
       <Sidebar
         initialUnseenRequestsCount={unseenRequestCount}
         session={session as any}
         friends={friends}
       />
-      <div className="h-full w-full sm:flex-[0.70] lg:flex-[0.75]">
+      <div className="h-[91%] w-full sm:flex-[0.70] lg:flex-[0.75]">
         {children}
       </div>
     </div>

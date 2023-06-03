@@ -13,8 +13,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-[#26282b]">
+      <body className="bg-[url('/back3.svg')] bg-cover bg-center bg-no-repeat">
         <Provider>{children}</Provider>
+        <footer>
+          <h1 className="absolute bottom-4 right-4 z-[10000] text-white">
+            &copy; {new Date().getFullYear()}
+            <a
+              href=""
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-1 text-green-400 hover:underline hover:underline-offset-2"
+            >
+              Kunwar Aditya
+            </a>
+          </h1>
+        </footer>
       </body>
     </html>
   );
