@@ -20,13 +20,13 @@ const Page: FC = () => {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center space-y-10">
       {loading ? (
-        <div className="w-[10rem] rounded-md bg-[#353941] px-5 py-3 text-white md:px-8 md:py-4">
-          <AiOutlineLoading3Quarters className="mx-auto h-5 w-5 animate-spin text-center" />
+        <div className="w-[10rem] rounded-full bg-[#353941] px-5 py-3 text-white md:w-[18rem] md:px-8 md:py-4">
+          <AiOutlineLoading3Quarters className="mx-auto h-8 w-5 animate-spin text-center" />
         </div>
       ) : (
         <button
           onClick={handleGoogleLogin}
-          className="flex items-center space-x-4 rounded-md bg-[#353941] px-5 py-3 text-white md:px-8 md:py-4 md:uppercase md:tracking-wider"
+          className="flex items-center space-x-4 rounded-full bg-[#353941] px-5  py-3  text-white ring-green-400 ring-offset-4 ring-offset-[#26282b] active:ring-2 md:px-8 md:py-4 md:uppercase md:tracking-wider"
         >
           <FcGoogle className="h-5 w-5 md:h-7 md:w-7" />
           <p className="font-light md:text-2xl">Login with Google</p>

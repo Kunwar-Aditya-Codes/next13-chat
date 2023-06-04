@@ -7,8 +7,15 @@ export function toPusherKey(key: string) {
   return key.replace(/:/g, "__");
 }
 
-import { DynaPuff } from "next/font/google";
+import {
+  DynaPuff,
+  Maven_Pro,
+  Noto_Serif_Armenian,
+  Foldit,
+  Arima,
+  Tilt_Prism,
+} from "next/font/google";
 
-export const dyna = DynaPuff({
+export const dyna = Tilt_Prism({
   subsets: ["latin"],
 });
