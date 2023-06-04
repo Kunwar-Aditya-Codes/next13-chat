@@ -34,6 +34,8 @@ const Messages: FC<MessagesProps> = ({
     pusherClient.subscribe(toPusherKey(`chat:${chatId}`));
 
     const messageHandler = (message: Message) => {
+      console.log("messageHandler", message);
+
       setMessages((prev) => [message, ...prev]);
     };
 
