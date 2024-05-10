@@ -22,7 +22,7 @@
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
     "nanoid": "^4.0.2",
-    "next": "13.4.3",
+    "next": "14.1.1",
     "next-auth": "^4.22.1",
     "nextjs-progressbar": "^0.0.16",
     "postcss": "8.4.23",
